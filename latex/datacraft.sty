@@ -1,0 +1,34 @@
+% Datacraft fonts for LuaLaTeX and XeLaTeX.
+%   \usepackage{datacraft}          % Serif text, Datacraft Math
+%   \usepackage[sans]{datacraft}    % Sans text, Datacraft Sans Math (slides, posters)
+% Fonts are found by file name: install them, or \def\datacraftpath{/path/to/fonts/desktop/}
+% before \usepackage. The path must end in a slash.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{datacraft}[2026/11/22 v1.000 Datacraft fonts]
+\RequirePackage{fontspec}
+\RequirePackage{unicode-math}
+
+\newif\ifdatacraft@sans
+\DeclareOption{sans}{\datacraft@sanstrue}
+\ProcessOptions\relax
+
+\providecommand\datacraftpath{}
+
+\setmainfont{DatacraftSerif}[
+	Path=\datacraftpath serif/static/, Extension=.ttf,
+	UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setsansfont{DatacraftSans}[
+	Path=\datacraftpath sans/, Extension=.ttf, Scale=MatchLowercase,
+	UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic]
+\setmonofont{DatacraftMono}[
+	Path=\datacraftpath mono/static/, Extension=.ttf, Scale=MatchLowercase,
+	UprightFont=*-Regular, BoldFont=*-Bold, ItalicFont=*-Italic, BoldItalicFont=*-BoldItalic,
+	Ligatures=NoCommon]
+
+\ifdatacraft@sans
+	\renewcommand\familydefault{\sfdefault}
+	\setmathfont{DatacraftSansMath-Regular.otf}[Path=\datacraftpath sans-math/]
+\else
+	\setmathfont{DatacraftMath-Regular.ttf}[Path=\datacraftpath math/]
+\fi
+\endinput

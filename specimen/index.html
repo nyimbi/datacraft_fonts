@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Datacraft Fonts</title>
+<link rel="stylesheet" href="../css/datacraft.css">
+<style>
+:root {
+	--bg: #fbfaf7; --fg: #1b1d22; --muted: #5d6270; --rule: #e3e0d8; --accent: #1f5fa8; --panel: #ffffff;
+	color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+	:root { --bg: #14161a; --fg: #e6e4df; --muted: #9a9fab; --rule: #2a2e36; --accent: #7fb0ec; --panel: #1b1e24; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); }
+main { max-width: 46rem; margin: 0 auto; padding: 3rem 1rem 5rem; }
+header.dc-ui h1 { font-weight: 600; font-size: 2rem; letter-spacing: -0.01em; margin: 0 0 .25rem; }
+header.dc-ui p { color: var(--muted); margin: 0; }
+section { border-top: 1px solid var(--rule); margin-top: 3rem; padding-top: 1.5rem; }
+.label { font-family: var(--dc-mono); font-size: .75rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin: 0 0 1rem; }
+.dc-prose { font-size: 1.125rem; line-height: 1.6; }
+.dc-prose h2 { font-weight: 700; font-size: 1.5rem; line-height: 1.25; margin: 0 0 .75rem; }
+math[display="block"] { margin: 1.25rem 0; }
+pre { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: .9rem 1rem; overflow-x: auto; line-height: 1.5; }
+.dc-ui { font-size: .95rem; line-height: 1.45; }
+.panel { background: var(--panel); border: 1px solid var(--rule); border-radius: 8px; padding: 1rem; }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: right; padding: .4rem .6rem; border-bottom: 1px solid var(--rule); }
+th:first-child, td:first-child { text-align: left; }
+th { font-weight: 500; color: var(--muted); }
+.row { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+button { font: inherit; font-weight: 500; border-radius: 6px; padding: .45rem .9rem; border: 1px solid var(--rule); background: var(--panel); color: var(--fg); }
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.weights span { display: block; font-size: 1.4rem; }
+</style>
+</head>
+<body>
+<main>
+<header class="dc-ui">
+	<h1>Datacraft Fonts</h1>
+	<p>Serif, Sans, Mono, and two OpenType MATH faces on one baseline grid.</p>
+</header>
+
+<section class="dc-prose">
+	<p class="label">Datacraft Serif + Datacraft Math</p>
+	<h2>Concentration of a sum of bounded variables</h2>
+	<p>Let <math><msub><mi>X</mi><mn>1</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>X</mi><mi>n</mi></msub></math> be independent with <math><msub><mi>a</mi><mi>i</mi></msub><mo>≤</mo><msub><mi>X</mi><mi>i</mi></msub><mo>≤</mo><msub><mi>b</mi><mi>i</mi></msub></math>, and write <math><msub><mi>S</mi><mi>n</mi></msub><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>X</mi><mi>i</mi></msub></math>. For every <math><mi>t</mi><mo>&gt;</mo><mn>0</mn></math>, Hoeffding's inequality gives</p>
+	<math display="block">
+		<mrow>
+			<mi mathvariant="normal">Pr</mi><mo stretchy="false">[</mo><mrow><msub><mi>S</mi><mi>n</mi></msub><mo>−</mo><mi>𝔼</mi><msub><mi>S</mi><mi>n</mi></msub><mo>≥</mo><mi>t</mi></mrow><mo stretchy="false">]</mo>
+			<mo>≤</mo>
+			<mi>exp</mi><mo>⁡</mo><mrow><mo>(</mo><mo>−</mo><mfrac><mrow><mn>2</mn><msup><mi>t</mi><mn>2</mn></msup></mrow><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msup><mrow><mo>(</mo><msub><mi>b</mi><mi>i</mi></msub><mo>−</mo><msub><mi>a</mi><mi>i</mi></msub><mo>)</mo></mrow><mn>2</mn></msup></mrow></mfrac><mo>)</mo></mrow>
+		</mrow>
+	</math>
+	<p>The Gaussian integral and the Fourier inversion formula set the tall operators against the text:</p>
+	<math display="block">
+		<mrow>
+			<msubsup><mo>∫</mo><mrow><mo>−</mo><mi>∞</mi></mrow><mi>∞</mi></msubsup><msup><mi>e</mi><mrow><mo>−</mo><msup><mi>x</mi><mn>2</mn></msup></mrow></msup><mspace width="0.17em"/><mi>d</mi><mi>x</mi><mo>=</mo><msqrt><mi>π</mi></msqrt><mo>,</mo>
+			<mspace width="2em"/>
+			<mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><mfrac><mn>1</mn><mrow><mn>2</mn><mi>π</mi></mrow></mfrac><msubsup><mo>∫</mo><mrow><mo>−</mo><mi>∞</mi></mrow><mi>∞</mi></msubsup><mover><mi>f</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ξ</mi><mo stretchy="false">)</mo><mspace width="0.17em"/><msup><mi>e</mi><mrow><mi>i</mi><mi>ξ</mi><mi>x</mi></mrow></msup><mspace width="0.17em"/><mi>d</mi><mi>ξ</mi>
+		</mrow>
+	</math>
+	<p>A matrix, to check stretchy delimiters: <math><mi>A</mi><mo>=</mo><mrow><mo>(</mo><mtable><mtr><mtd><mi>α</mi></mtd><mtd><mi>β</mi></mtd></mtr><mtr><mtd><mi>γ</mi></mtd><mtd><mi>δ</mi></mtd></mtr></mtable><mo>)</mo></mrow></math>, with <math><mo>det</mo><mi>A</mi><mo>=</mo><mi>α</mi><mi>δ</mi><mo>−</mo><mi>β</mi><mi>γ</mi></math>. Inline code such as <code>np.linalg.det(A)</code> sits at the serif's x-height.</p>
+	<pre><code>def hoeffding_bound(t: float, widths: list[float]) -&gt; float:
+	return math.exp(-2 * t**2 / sum(w * w for w in widths))</code></pre>
+</section>
+
+<section class="dc-ui">
+	<p class="label">Datacraft Sans + Datacraft Sans Math</p>
+	<div class="panel">
+		<table>
+			<thead><tr><th>Model</th><th>Params</th><th>Loss</th><th>p99 latency</th></tr></thead>
+			<tbody>
+				<tr><td>baseline</td><td>110.4M</td><td>2.3171</td><td>41.08 ms</td></tr>
+				<tr><td>distilled</td><td>18.9M</td><td>2.4410</td><td>7.11 ms</td></tr>
+				<tr><td>quantized</td><td>18.9M</td><td>2.4588</td><td>3.90 ms</td></tr>
+			</tbody>
+		</table>
+		<p>Objective: <math><mi>ℒ</mi><mo stretchy="false">(</mo><mi>θ</mi><mo stretchy="false">)</mo><mo>=</mo><mo>−</mo><msub><mi>𝔼</mi><mrow><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo></mrow></msub><mi>log</mi><mo>⁡</mo><msub><mi>p</mi><mi>θ</mi></msub><mo stretchy="false">(</mo><mi>y</mi><mo>∣</mo><mi>x</mi><mo stretchy="false">)</mo><mo>+</mo><mi>λ</mi><msubsup><mrow><mo>‖</mo><mi>θ</mi><mo>‖</mo></mrow><mn>2</mn><mn>2</mn></msubsup></math>. Run with <code>--lambda 1e-4</code>.</p>
+		<div class="row"><button class="primary">Run experiment</button><button>Export CSV</button></div>
+	</div>
+</section>
+
+<section>
+	<p class="label">Weights</p>
+	<div class="weights">
+		<span style="font-family: var(--dc-serif); font-weight: 400">Serif 400 <i>italic</i> αβγ ∂ ∇ 0123456789</span>
+		<span style="font-family: var(--dc-serif); font-weight: 700">Serif 700 <i>italic</i> αβγ ∂ ∇ 0123456789</span>
+		<span style="font-family: var(--dc-sans); font-weight: 300">Sans 300 <i>italic</i> αβγ 0123456789</span>
+		<span style="font-family: var(--dc-sans); font-weight: 500">Sans 500 <i>italic</i> αβγ 0123456789</span>
+		<span style="font-family: var(--dc-sans); font-weight: 700">Sans 700 <i>italic</i> αβγ 0123456789</span>
+		<span style="font-family: var(--dc-mono); font-weight: 400">Mono 400 <i>italic</i> != -&gt; &lt;= 0O 1lI</span>
+		<span style="font-family: var(--dc-mono); font-weight: 700">Mono 700 <i>italic</i> != -&gt; &lt;= 0O 1lI</span>
+	</div>
+</section>
+</main>
+</body>
+</html>

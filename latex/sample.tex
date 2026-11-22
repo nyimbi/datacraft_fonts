@@ -1,0 +1,17 @@
+% lualatex sample.tex  (from this directory)
+\documentclass{article}
+\def\datacraftpath{../fonts/desktop/}
+\usepackage{datacraft}
+\begin{document}
+\section{Concentration of a sum of bounded variables}
+Let $X_1,\dots,X_n$ be independent with $a_i \le X_i \le b_i$ and $S_n = \sum_{i=1}^n X_i$.
+For every $t > 0$, \textbf{Hoeffding's inequality} gives
+\[
+	\Pr\bigl[S_n - \mathbb{E} S_n \ge t\bigr]
+	\le \exp\!\left(-\frac{2t^2}{\sum_{i=1}^n (b_i - a_i)^2}\right),
+	\qquad
+	\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}.
+\]
+The \textit{italic}, \textsf{sans} and \texttt{np.linalg.det(A)} faces share an x-height
+via \texttt{Scale=MatchLowercase}; $\mathcal{L}(\theta) = -\mathbb{E}\log p_\theta(y \mid x)$.
+\end{document}
