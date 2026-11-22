@@ -1,88 +1,65 @@
 # Datacraft fonts
 
-Five font families for equation-heavy writing: papers, blog posts and web app UIs. Text, math and code share one set of vertical metrics, so mixing them in a line doesn't shift the baseline or blow up the line height.
+Five font families for equation-heavy writing: papers, technical blog posts and web app UIs. Text, math and code share one set of vertical metrics, so a formula or a code span in the middle of a sentence keeps the baseline and the line spacing steady.
 
-| Family | Use it for | Built from | Styles |
+![Datacraft specimen: serif prose with inline and display equations, and a sans UI panel with a table and an equation](docs/images/specimen.png)
+
+| Family | For | Built from | Styles |
 |---|---|---|---|
-| Datacraft Serif | Body text in papers and long posts | STIX Two Text | variable 400 to 700, italic |
-| Datacraft Math | Equations set with Datacraft Serif | STIX Two Math | Regular, OpenType MATH |
-| Datacraft Sans | UI, headings, slides, dashboards | Fira Sans | 300, 400, 500, 600, 700, italics |
-| Datacraft Sans Math | Equations set with Datacraft Sans | Fira Math 0.3.4 | Regular, OpenType MATH |
-| Datacraft Mono | Code, data, terminals | JetBrains Mono | variable 100 to 800, italic |
+| **Datacraft Serif** | Papers, long-form posts | STIX Two Text | 400 to 700, italic |
+| **Datacraft Math** | Equations with Serif | STIX Two Math | OpenType MATH |
+| **Datacraft Sans** | UI, headings, slides | Fira Sans | 300 to 700, italic |
+| **Datacraft Sans Math** | Equations with Sans | Fira Math | OpenType MATH |
+| **Datacraft Mono** | Code, data, terminals | JetBrains Mono | 100 to 800, italic |
 
-Each math face is the companion of its text face. STIX Two Math was drawn to match STIX Two Text, and Fira Math to match Fira Sans, so an italic *x* in a formula is the same letter as an italic *x* in the sentence around it.
+Each math face matches its text face, so an italic *x* in an equation is the same letter as the *x* in the sentence around it.
 
-## What "Datacraft" changes
+## Quick start
 
-These are renamed, retuned builds of open-source fonts, not new outlines. The build does three things:
-
-1. **Renames** every family-name record (and the CFF names in Sans Math). The upstream copyright and license records stay as they were. OFL 1.1 requires modified fonts to drop the upstream names.
-2. **Unifies vertical metrics.** Every face gets ascender 900, descender -300, line gap 0 (per 1000 units), with `USE_TYPO_METRICS` set, so `line-height: normal` is 1.2 everywhere. The Windows clipping box is widened to each font's real bounds, so tall integrals and stacked fractions never clip.
-3. **Cuts static instances** (Regular, Bold, Italic, Bold Italic) of the variable Serif and Mono for LaTeX and office apps, which handle variable fonts unevenly.
-
-Glyph outlines, kerning, OpenType features and the MATH tables are untouched. The build asserts that glyph counts and MATH tables survive.
-
-## Layout
-
-```text
-fonts/desktop/<family>/       TTF/OTF to install; static/ holds the Serif and Mono instances
-fonts/web/                    WOFF2 for the web, plus the OFL licenses
-fonts/manifest.json           per-face metadata (x-height, weight, size)
-css/datacraft.css             @font-face rules and CSS variables
-latex/datacraft.sty           fontspec and unicode-math setup
-specimen/index.html           type specimen; open it in a browser
-build.py, tests/              build and gate
-sources/                      upstream fonts and licenses, see sources/INDEX.md
-```
-
-## Web
-
-Copy `fonts/web/` and `css/datacraft.css`, keeping the `../fonts/web/` relative path, then opt in per region:
+**Web.** Copy `css/` and `fonts/web/` to your site, then:
 
 ```html
 <link rel="stylesheet" href="/css/datacraft.css">
-<article class="dc-prose">...</article>   <!-- Serif, Math, scaled Mono -->
-<div class="dc-ui">...</div>              <!-- Sans, Sans Math, tabular figures -->
+<article class="dc-prose">...</article>   <!-- Serif text, Datacraft Math, scaled code -->
+<div class="dc-ui">...</div>              <!-- Sans text, Sans Math, tabular figures -->
 ```
 
-Or use the variables directly: `--dc-serif`, `--dc-sans`, `--dc-mono`, `--dc-math`, `--dc-sans-math`. Inside `.dc-prose` and `.dc-ui`, inline `code` is scaled (`--dc-mono-in-serif` is 0.860em, `--dc-mono-in-sans` is 0.951em) so its x-height matches the surrounding text.
+Equations need to be MathML: render LaTeX with [Temml](https://temml.org), or with KaTeX's `output: "mathml"`.
 
-### Equations on the web
-
-The math faces carry an OpenType MATH table, which browsers use to lay out native MathML. Chrome and Edge (109 and later), Firefox and Safari all support it. Render LaTeX to MathML and let the CSS pick the font:
-
-- **Temml** converts LaTeX to MathML and is built for this setup.
-- **KaTeX** with `output: "mathml"` works too. Its default HTML output uses KaTeX's own fonts and ignores Datacraft.
-- **MathJax** draws with its own font data, so its CHTML and SVG output won't use Datacraft Math either.
-
-Prose uses lining figures on purpose: numbers in a sentence should match numbers in the equation next to it.
-
-## Desktop and LaTeX
-
-Install the files under `fonts/desktop/` (on macOS, open them in Font Book). Then, with LuaLaTeX or XeLaTeX:
+**LaTeX** (LuaLaTeX or XeLaTeX), after installing the fonts and `latex/datacraft.sty`:
 
 ```latex
-\usepackage{datacraft}          % Serif text with Datacraft Math
-\usepackage[sans]{datacraft}    % Sans text with Datacraft Sans Math, for slides
+\usepackage{datacraft}          % papers
+\usepackage[sans]{datacraft}    % slides
 ```
 
-To use the fonts without installing them, set the path first: `\def\datacraftpath{/abs/path/fonts/desktop/}`. Sans and Mono load with `Scale=MatchLowercase`, which matches their x-height to the serif. Mono ligatures are off in LaTeX, because `!=` drawn as `≠` in a code listing reads as math. On the web they stay on. Add `font-variant-ligatures: none` if you want them off there too. `latex/sample.tex` compiles as-is with `lualatex sample.tex`.
+**Desktop.** Download the desktop archive from [releases](https://github.com/nyimbi/datacraft_fonts/releases) and install the files listed in [the install guide](docs/install.md#which-files-to-install).
 
-## Build
+## Documentation
 
-```sh
-uv run build.py
-uv run --with pytest --with fonttools --with brotli pytest -q tests
-```
+| Guide | Covers |
+|---|---|
+| [Installing](docs/install.md) | macOS, Windows, Linux, LaTeX, websites, uninstalling |
+| [Web](docs/web.md) | CSS classes and variables, MathML with Temml and KaTeX, Tailwind, Next.js, performance |
+| [LaTeX and Pandoc](docs/latex.md) | the `datacraft` package, unicode-math, Pandoc to PDF and HTML |
+| [Typst, Word, matplotlib, editors](docs/other-tools.md) | setup for each tool, with its limits |
+| [Design rationale](docs/design.md) | why these fonts, the shared metrics, figure styles |
+| [Reference](docs/reference.md) | every face, its metrics, names and OpenType features |
+| [Building and contributing](docs/building.md) | the build, the tests, updating upstream fonts, releases |
 
-The tests check every built file: no upstream name in a family record, the shared metrics, a Windows box that covers the glyph bounds, license and copyright kept, and MATH tables present. A canary test runs the leak check against the untouched upstream fonts and expects it to fire.
+Open `specimen/index.html` in a browser to see every face.
+
+## What Datacraft is
+
+Datacraft is a coordinated build of five open-source fonts, not a newly drawn typeface. The build renames each font, gives all five the same vertical metrics, cuts static instances of the variable fonts for LaTeX and office apps, and generates the web files, stylesheet and LaTeX package. Glyph outlines, kerning, features and math tables are unchanged. [Design rationale](docs/design.md) explains each choice.
 
 ## Known limits
 
-- Fira Math is a 0.x release. It covers ordinary analysis, linear algebra and probability notation but fewer symbols than STIX Two Math. If a symbol is missing in Sans mode, switch that document to Serif and Datacraft Math.
-- Datacraft Math is about 545 KiB as WOFF2. It is not subset, because subsetting a MATH font can drop the glyph variants and assemblies that stretchy delimiters need. Load it only on pages that have equations.
-- Datacraft Serif comes in weights 400 to 700 only, which is what STIX Two Text offers. Use Datacraft Sans for light display text.
+- Fira Math, the source of Datacraft Sans Math, is a pre-1.0 release with fewer symbols than Datacraft Math. If a symbol is missing in a sans document, switch it to Serif and Datacraft Math.
+- Datacraft Math is 545 KiB as WOFF2. Don't subset it, since that breaks stretchy brackets. Load it only on pages with equations.
+- MathJax and KaTeX's default HTML output draw equations with their own fonts and won't use Datacraft Math.
+- Datacraft Serif comes in weights 400 to 700 only.
 
 ## License
 
-SIL Open Font License 1.1, inherited from each upstream font. See `sources/INDEX.md` and the `OFL*.txt` files that ship with the fonts.
+SIL Open Font License 1.1, inherited from STIX Two (© The STIX Fonts Project Authors), Fira Sans (© The Mozilla Foundation and Telefonica S.A.), Fira Math (© Xiangdong Zeng) and JetBrains Mono (© The JetBrains Mono Project Authors). You can use, embed, bundle and modify the fonts, but not sell them on their own. Every font ships with its license; provenance is in [sources/INDEX.md](sources/INDEX.md).
